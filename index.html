@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Geometry Dash уровни</title>
+    <style>
+        body {
+            background-color: #111;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: gold;
+            font-size: 28px;
+        }
+        
+        .opisanie {
+            text-align: center;
+            color: gray;
+            margin-bottom: 20px;
+        }
+        
+        .poisk {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #222;
+            color: white;
+            border: 1px solid #444;
+            border-radius: 5px;
+        }
+        
+        .spisok {
+            display: block;
+        }
+        
+        .karta {
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+        }
+        
+        .karta img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        
+        .nazvanie {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 10px 0 5px;
+        }
+        
+        .info {
+            color: #aaa;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        
+        .slozhnost {
+            display: inline-block;
+            background-color: #8B00FF;
+            padding: 3px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin: 8px 0;
+        }
+        
+        .statistika {
+            background-color: #222;
+            padding: 8px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        
+        .stat {
+            font-size: 13px;
+            color: #bbb;
+            margin: 5px 0;
+        }
+        
+        .opis {
+            color: #888;
+            font-size: 13px;
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+        
+        .data {
+            font-size: 11px;
+            color: #666;
+            text-align: right;
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>⚡ ТОП ДЕМОНОВ ⚡</h1>
+    <div class="opisanie">Самые сложные уровни в Geometry Dash</div>
+    
+    <input type="text" class="poisk" id="search" placeholder="🔍 Найти уровень..." onkeyup="poisk()">
+    
+    <div class="spisok" id="spisok">
+        <!-- сюда будут загружаться уровни -->
+    </div>
+</div>
+
+<script>
+    const urovni = [
+        {
+            mesto: 1,
+            name: "Thinking Space II",
+            sozdatel: "CairoX",
+            verifer: "Zoink",
+            slozhnost: "Extreme",
+            video: "https://youtu.be/fnz9ddZjIGc?si=VVuzpHnhhbkvSLx1",
+            img: "https://i.ytimg.com/vi/CELNmHwln_c/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLD8lyCMTPW4JapRunLWbqwSGcUJfw",
+            opis: "Топ-1 демон на данный момент. Очень сложный уровень с космической темой и приятной музыкой.",
+            data_sozd: "15.03.2024",
+            data_verif: "12.01.2025",
+            dlina: "1:19",
+            vremya_sozd: "14 месяцев"
+        },
+        {
+            mesto: 2,
+            name: "Flamewall",
+            sozdatel: "Narwall",
+            verifer: "CuatrocientosYT",
+            slozhnost: "Extreme",
+            video: "https://youtu.be/gwNYGFmo_WY?si=yfoSSk9XjZgbaGGE",
+            img: "https://pbs.twimg.com/media/F4oL2YeXIAA5Q19.jpg",
+            opis: "очень красивый уровень с атмосферной музыкой,выполнен в огненном стиле и длится почти 7 минут.",
+            data_sozd: "22.04.2024",
+            data_verif: "18.09.2025",
+            dlina: "6:42",
+            vremya_sozd: "17 месяцев"
+        },
+        {
+            mesto: 3,
+            name: "Amethyst",
+            sozdatel: "iMist",
+            verifer: "wPopoff",
+            slozhnost: "Extreme",
+            video: "https://youtu.be/OqGuNBi3_SU?si=16BstGBbSnSWOsaD",
+            img: "https://i.ytimg.com/vi/iFBkJFUydkE/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDa9H4tyWGXvnIa-1j1OG2bBeFZ-A",
+            opis: "красивый уровень выполнен в фиолетовом цвете.",
+            data_sozd: "10.06.2024",
+            data_verif: "25.11.2025",
+            dlina: "1:20",
+            vremya_sozd: "11 месяцев"
+        },
+        {
+            mesto: 4,
+            name: "Tidal Wave",
+            sozdatel: "OniLink",
+            verifer: "Zoink",
+            slozhnost: "Extreme",
+            video: "https://youtu.be/YbyfDYChIYU?si=RO8O2vzLxzBSvx3E",
+            img: "https://i.ytimg.com/vi/wdK7JTw24l0/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDpgIUkN3jUrDlHZEQV5HzIxtZOMA",
+            opis: "легендарный уровень,который в свое время простоял почти 2 года в топ 1.",
+            data_sozd: "05.02.2023",
+            data_verif: "19.08.2024",
+            dlina: "3:00",
+            vremya_sozd: "18 месяцев"
+        },
+        {
+            mesto: 5,
+            name: "ORBIT",
+            sozdatel: "MindCap",
+            verifer: "Zoink",
+            slozhnost: "Extreme",
+            video: "https://youtu.be/9oHv_cK84WI?si=aOFMUuyBZJ77SWfs",
+            img: "https://i.ytimg.com/vi/HWg8dtItGCA/maxresdefault.jpg",
+            opis: "уникальный уровень геймплей которого сделан полностью из орбов.",
+            data_sozd: "20.07.2025",
+            data_verif: "10.02.2026",
+            dlina: "2:17",
+            vremya_sozd: "7 месяцев"
+        },
+        {
+            mesto: 6,
+            name: "Nullscapes",
+            sozdatel: "Kiba",
+            verifer: "Zoink",
+            slozhnost: "Extreme",
+            video: "https://youtu.be/C-KDhWkXlvI?si=1Q9elX6GU1iTVN94",
+            img: "https://i.ytimg.com/vi/EztneTPp5CU/maxresdefault.jpg",
+            opis: "очень атмосферный уровень с приятной музыкой сиквел к уровню - shardscapes.",
+            data_sozd: "12.03.2023",
+            data_verif: "30.06.2024",
+            dlina: "1:30",
+            vremya_sozd: "15 месяцев"
+        },
+        {
+            mesto: 7,
+            name: "BOOBAWAMBA",
+            sozdatel: "Akunakunn",
+            verifer: "eastshark",
+            slozhnost: "Extreme",
+            video: "https://youtu.be/TAPij318cjE?si=eVttIEI5UtXyjL1y",
+            img: "https://i.ytimg.com/vi/20fYiqLAo_E/maxresdefault.jpg",
+            opis: "у этого уровня основная тематика завязана на мемори(геймплей который надо запоминать).",
+            data_sozd: "18.09.2024",
+            data_verif: "22.12.2025",
+            dlina: "2:10",
+            vremya_sozd: "9 месяцев"
+        },
+        {
+            mesto: 8,
+            name: "Quanteuse processing",
+            sozdatel: "Renn241",
+            verifer: "Zoink",
+            slozhnost: "Extreme",
+            video: "https://youtu.be/sRUO72zI2GQ?si=u-snhEL5nN0dLY3z",
+            img: "https://i.ytimg.com/vi/sRUO72zI2GQ/maxresdefault.jpg",
+            opis: "сиквел к уровню - quantum processing.",
+            data_sozd: "05.05.2024",
+            data_verif: "14.10.2025",
+            dlina: "1:42",
+            vremya_sozd: "10 месяцев"
+        },
+        {
+            mesto: 9,
+            name: "Every End",
+            sozdatel: "MindCap",
+            verifer: "Hqmy",
+            slozhnost: "Extreme",
+            video: "https://youtu.be/f-O_TnxIZBA?si=DxcWAbkR0hgHcRHr",
+            img: "https://i.ytimg.com/vi/VW-kJz3UJMQ/maxresdefault.jpg",
+            opis: "уровень с декором 1.0,геймплей который будет дальше показывается на заднем фоне.",
+            data_sozd: "02.03.2024",
+            data_verif: "17.08.2025",
+            dlina: "7:20",
+            vremya_sozd: "12 месяцев"
+        },
+        {
+            mesto: 10,
+            name: "andromeda",
+            sozdatel: "Insxne97",
+            verifer: "Taiago",
+            slozhnost: "Extreme",
+            video: "https://youtu.be/fFtQxxepyDo?si=wO5A82_lLEVX9ACZ",
+            img: "https://i.ytimg.com/vi/iI0hymTllo0/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBGwVn7sjoGfego6zR9Fg-rhgCUWA",
+            opis: "уровень с космической тематикой.",
+            data_sozd: "25.11.2024",
+            data_verif: "08.01.2026",
+            dlina: "1:14",
+            vremya_sozd: "8 месяцев"
+        }
+    ];
+
+    function pokazatUrovni() {
+        let searchText = document.getElementById('search').value.toLowerCase();
+        let spisok = document.getElementById('spisok');
+        let html = '';
+        
+        for (let i = 0; i < urovni.length; i++) {
+            let u = urovni[i];
+            if (u.name.toLowerCase().includes(searchText)) {
+                html += `
+                    <div class="karta">
+                        <img src="${u.img}" onclick="window.open('${u.video}')" onerror="this.src=''">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="color: gold;">#${u.mesto}</span>
+                            <span class="slozhnost">${u.slozhnost}</span>
+                        </div>
+                        <div class="nazvanie">${u.name}</div>
+                        <div class="info">Создатель: ${u.sozdatel}</div>
+                        <div class="info">Верифер: ${u.verifer}</div>
+                        <div class="statistika">
+                            <div class="stat">⏱️ Длительность: ${u.dlina}</div>
+                            <div class="stat">🛠️ Делали: ${u.vremya_sozd}</div>
+                        </div>
+                        <div class="opis">${u.opis}</div>
+                        <div class="data">
+                            📅 создан: ${u.data_sozd}<br>
+                            ✅ верифицирован: ${u.data_verif}
+                        </div>
+                    </div>
+                `;
+            }
+        }
+        
+        if (html == '') {
+            html = '<div style="text-align: center; color: gray;">ничего не найдено</div>';
+        }
+        
+        spisok.innerHTML = html;
+    }
+    
+    function poisk() {
+        pokazatUrovni();
+    }
+    
+    pokazatUrovni();
+</script>
+
+</body>
+</html>
